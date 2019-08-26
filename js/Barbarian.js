@@ -1,17 +1,29 @@
 /* eslint-disable no-undef */
 
-class Barbarian {
-  constructor(col, row) {
-    this.col = col;
-    this.row = row;
+/* eslint-disable no-undef */
+
+class Barbarian extends Character {
+  constructor(game) {
+    super(game);
+    this.game = game;
+    // this.controls = new barbarianControls(this);
+    // this.controls.barbarianControls(this);
     this.image = new Image();
-    this.image.src = './../img/barbarian-right-1.png';
-    this.controls = new barbarianControls(this);
-    this.controls.barbarianControls();
+    this.image.src = './../img/barbarian/barbarian-right-1.png';
     this.life = 1;
     this.speed = 3;
+    this.sprites = {
+      up1: './../img/barbarian/barbarian-up-1.png',
+      up2: './../img/barbarian/barbarian-up-2.png',
+      right1: './../img/barbarian/barbarian-right-1.png',
+      right2: './../img/barbarian/barbarian-right-2.png',
+      down1: './../img/barbarian/barbarian-down-1.png',
+      down2: './../img/barbarian/barbarian-down-2.png',
+      left1: './../img/barbarian/barbarian-left-1.png',
+      left2: './../img/barbarian/barbarian-left-2.png',
+    }
   }
-  draw(ctx) {
-    ctx.drawImage(this.image, (this.col - 1) * 50, (this.row - 1) * 50, 50, 50);
+  test() {
+    console.log('test')
   }
   }

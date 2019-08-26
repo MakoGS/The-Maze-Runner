@@ -6,7 +6,6 @@ class Game {
     this.width = this.canvas.width
     this.height = this.canvas.height
     this.context = this.canvas.getContext('2d');
-    this.home = new Home (this);
     // this.maze = new MazeGenerator (this);
     this.timer = 0;
     this.SPEED = 0.05;
