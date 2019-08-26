@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  /* background-color: var(--prim-clr)
+  background-image: url("./../img/home-bg.jpg"); */
+  background-color: aliceblue;
+}
+
+
+canvas {
+  /* background-image: url("./../img/home-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center; */
+background-color: blanchedalmond;
+  border: 1px solid black;
+  max-height: 90vh;
+  max-width: 95vw;
+  margin: auto;
+  cursor: none;
+  display: none;
+}
+
+.testing {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: none;
+}
