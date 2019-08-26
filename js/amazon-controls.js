@@ -7,6 +7,7 @@ class AmazonControls {
     this.row = 5;
     // this.itemsAndEnemies = new ItemsAndEnemies(this);
   }
+
   amazonControls() {
     window.addEventListener('keydown', event => {
       const key = event.keyCode;

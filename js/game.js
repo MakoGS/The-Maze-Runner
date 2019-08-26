@@ -7,9 +7,31 @@ class Game {
     this.height = this.canvas.height
     this.context = this.canvas.getContext('2d');
     this.home = new Home (this);
+    // this.maze = new MazeGenerator (this);
     this.timer = 0;
     this.SPEED = 0.05;
+    this.controls = new Controls(this);
+    this.controls.setKeyBindings()
   }
+
+  handleControl(direction) {
+    // React to whatever control is pressed
+    switch (direction) {
+      case 'up':
+        this.character.move('up');
+        break;
+      case 'right':
+        this.character.move('right');
+        break;
+      case 'down':
+        this.character.move('down');
+        break;
+      case 'left':
+        this.character.move('left');
+        break;
+    }
+  }
+
   homeGame() {
     this.showScreen('testing')
     this.hideScreen('canvas')
@@ -24,10 +46,6 @@ class Game {
     }
     window.requestAnimationFrame((timestamp) => this.loop(timestamp));
   }
-  update() {
-    this.context.clearRect(0,0,this.width,this.height);
-    this.home.amazonn();
-  }
       // Hide specific screen
     hideScreen(id) {
         let screen = document.getElementById(id);
@@ -41,16 +59,25 @@ class Game {
     //Show Canvas Screen
     showCanvasScreen(character) {
       switch (character) {
-      case 'amazon':
-        //amazon
-      break;
-      case 'barbarian':
+        case 'amazon':
+          //amazon
+          this.character = new Amazon(this);
+          
+          break;
+        case 'barbarian':
+          this.character = new Barbarian(this);
+          break;
         //barbarian
-      break;
-        }
-        this.hideScreen('testing');
-        this.showScreen("canvas");
-        this.startGame();
+      }
+      this.hideScreen('testing');
+      this.showScreen("canvas");
+      this.startGame();
   
 }
+update() {
+  this.context.clearRect(0,0,this.width,this.height);
+  // this.maze.display(maze(8,11));
+  this.character.drawCharacter()
+}
+
 }
