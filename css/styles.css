@@ -1,26 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Staatliches&display=swap');
+
+#containerr {
+margin:auto;
+  }
+
 body {
-  margin: 0;
-  /* background-color: var(--prim-clr)
-  background-image: url("./../img/home-bg.jpg"); */
+  background-color: var(--prim-clr);
+  background-image: url("./../img/home-bg.jpg");
   background-color: aliceblue;
 }
 
+h2 {
+  color: white;
+  font-family: 'Staatliches', cursive;
+  padding-top: 7%
+}
 
-canvas {
-  /* background-image: url("./../img/home-bg.png");
+#amazon-habilities {
+  margin-left: 5%;
+  text-align: left;
+}
+
+#barbarian-habilities {
+  text-align: right;
+  margin-right: 5%
+}
+
+.amazon-img {
+  height: 300px;
+}
+
+.barbarian-img {
+  height: 300px;
+
+}
+
+.centerlogo {
+  width: 500px;
+  height: 100%;
+}
+
+.home {
+  background-image: url("./../img/home-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: top center; */
-background-color: blanchedalmond;
+  background-position: center top;
+}
+
+canvas {
+  margin: auto;
+  background-color: blanchedalmond;
   border: 1px solid black;
   max-height: 90vh;
   max-width: 95vw;
-  margin: auto;
 }
 
 .testing {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: none;
+}
+
+#player h1 {
+  font-family: 'Staatliches', cursive;
+  font-size: 2.5rem;
+  letter-spacing: 6px;
+  font-weight: bold;
+  color: lightgrey;
+  text-shadow: 0 0 8px black;
 }

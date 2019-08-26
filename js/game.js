@@ -1,12 +1,13 @@
 /* eslint-disable no-undef */
 
 class Game {
+
   constructor(canvas) {
     this.canvas = canvas;
     this.width = this.canvas.width
     this.height = this.canvas.height
     this.context = this.canvas.getContext('2d');
-    // this.maze = new MazeGenerator (this);
+    this.maze = new MazeGenerator(this);
     this.timer = 0;
     this.SPEED = 0.05;
     this.controls = new Controls(this);
@@ -71,12 +72,18 @@ class Game {
       this.hideScreen('testing');
       this.showScreen("canvas");
       this.startGame();
-  
+      let maze = this.maze.newMaze(5,5)
+      console.log(maze[1]);
+      
 }
 update() {
-  this.context.clearRect(0,0,this.width,this.height);
-  // this.maze.display(maze(8,11));
+  //this.context.clearRect(0,0,this.width,this.height);
+  this.maze.runMaze();
   this.character.drawCharacter()
+
 }
+// runMaze() {
+//   this will ran function in maze-generator.js and next level screens
+// }
 
 }

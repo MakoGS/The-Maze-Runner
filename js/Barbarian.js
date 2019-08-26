@@ -1,7 +1,5 @@
 /* eslint-disable no-undef */
 
-/* eslint-disable no-undef */
-
 class Barbarian extends Character {
   constructor(game) {
     super(game);
@@ -25,5 +23,6 @@ class Barbarian extends Character {
   }
   test() {
     console.log('test')
+    console.log('Other test');
   }
   }

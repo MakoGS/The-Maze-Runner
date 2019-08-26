@@ -1,68 +1,101 @@
 class MazeGenerator {
+
   constructor(game) {
-    this.game = game
+    this.game = game;
+    this.image = new Image();
+    this.image.src = './../img/walls/ground.png';
   }
-  function maze(x,y) {
-    var n=x*y-1;
-    if (n<0) {alert("illegal maze dimensions");return;}
-    var horiz =[]; for (var j= 0; j<x+1; j++) horiz[j]= [],
-        verti =[]; for (var j= 0; j<x+1; j++) verti[j]= [],
-        here = [Math.floor(Math.random()*x), Math.floor(Math.random()*y)],
-        path = [here],
-        unvisited = [];
-    for (var j = 0; j<x+2; j++) {
-      unvisited[j] = [];
-      for (var k= 0; k<y+1; k++)
-        unvisited[j].push(j>0 && j<x+1 && k>0 && (j != here[0]+1 || k != here[1]+1));
+
+  newMaze(x, y) {
+
+    // Establish variables and starting grid
+    var totalCells = x * y;
+    var cells = new Array();
+    var unvis = new Array();
+    for (var i = 0; i < y; i++) {
+      cells[i] = new Array();
+      unvis[i] = new Array();
+      for (var j = 0; j < x; j++) {
+        cells[i][j] = [0, 0, 0, 0];
+        unvis[i][j] = true;
+      }
     }
-    while (0<n) {
-      var potential = [[here[0]+1, here[1]], [here[0],here[1]+1],
-          [here[0]-1, here[1]], [here[0],here[1]-1]];
-      var neighbors = [];
-      for (var j = 0; j < 4; j++)
-        if (unvisited[potential[j][0]+1][potential[j][1]+1])
-          neighbors.push(potential[j]);
+
+    // Set a random position to start from
+    var currentCell = [Math.floor(Math.random() * y), Math.floor(Math.random() * x)];
+    var path = [currentCell];
+    unvis[currentCell[0]][currentCell[1]] = false;
+    var visited = 1;
+
+    // Loop through all available cell positions
+    while (visited < totalCells) {
+      // Determine neighboring cells
+      var pot = [
+        [currentCell[0] - 1, currentCell[1], 0, 2],
+        [currentCell[0], currentCell[1] + 1, 1, 3],
+        [currentCell[0] + 1, currentCell[1], 2, 0],
+        [currentCell[0], currentCell[1] - 1, 3, 1]
+      ];
+      var neighbors = new Array();
+
+      // Determine if each neighboring cell is in game grid, and whether it has already been checked
+      for (var l = 0; l < 4; l++) {
+        if (pot[l][0] > -1 && pot[l][0] < y && pot[l][1] > -1 && pot[l][1] < x && unvis[pot[l][0]][pot[l][1]]) {
+          neighbors.push(pot[l]);
+        }
+      }
+
+      // If at least one active neighboring cell has been found
       if (neighbors.length) {
-        n = n-1;
-        next= neighbors[Math.floor(Math.random()*neighbors.length)];
-        unvisited[next[0]+1][next[1]+1]= false;
-        if (next[0] == here[0])
-          horiz[next[0]][(next[1]+here[1]-1)/2]= true;
-        else 
-          verti[(next[0]+here[0]-1)/2][next[1]]= true;
-        path.push(here = next);
-      } else 
-        here = path.pop();
+        // Choose one of the neighbors at random
+        let next = neighbors[Math.floor(Math.random() * neighbors.length)];
+
+        // Remove the wall between the current cell and the chosen neighboring cell
+        cells[currentCell[0]][currentCell[1]][next[2]] = 1;
+        cells[next[0]][next[1]][next[3]] = 1;
+
+        // Mark the neighbor as visited, and set it as the current cell
+        unvis[next[0]][next[1]] = false;
+        visited++;
+        currentCell = [next[0], next[1]];
+        path.push(currentCell);
+      }
+      // Otherwise go back up a step and keep going
+      else {
+        currentCell = path.pop();
+      }
     }
-    return {x: x, y: y, horiz: horiz, verti: verti};
+    return cells;
   }
-   
-  function display(m) {
-    var text= [];
-    for (var j= 0; j<m.x*2+1; j++) {
-      var line= [];
-      if (0 == j%2)
-        for (var k=0; k<m.y*4+1; k++)
-          if (0 == k%4) 
-            line[k]= '+';
-          else
-            if (j>0 && m.verti[j/2-1][Math.floor(k/4)])
-              line[k]= ' ';
-            else
-              line[k]= '-';
-      else
-        for (var k=0; k<m.y*4+1; k++)
-          if (0 == k%4)
-            if (k>0 && m.horiz[(j-1)/2][k/4-1])
-              line[k]= ' ';
-            else
-              line[k]= '|';
-          else
-            line[k]= ' ';
-      if (0 == j) line[1]= line[2]= line[3]= ' ';
-      if (m.x*2-1 == j) line[4*m.y]= ' ';
-      text.push(line.join('')+'\r\n');
+
+
+  runMaze() {
+    let x = 0;
+    let y = 0;
+    let template = this.newMaze(10, 10)
+
+    var xy = 10;
+    var maze = [];
+
+    for (var i = 0; i < xy * xy; i++) {
+      maze.push({
+        "x": x,
+        "y": y,
+        "state": template[i]
+      });
+      if (x == xy - 1) {
+        y++;
+        x = 0;
+      } else {
+        x++;
+      }
     }
-    return text.join('');
+
+    for (var i = 0; i < xy * xy; i++) {
+      if (maze[i].state == 1 || maze[i].state == "1") {
+        console.log('epa')
+        this.game.context.drawImage(this.image, maze[i].x * 32, maze[i].y * 32, 32, 32);
+      }
+    }
   }
 }
