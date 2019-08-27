@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Staatliches&display=swap');
 
-#containerr {
-margin:auto;
-  }
-
 body {
   background-color: var(--prim-clr);
   background-image: url("./../img/home-bg.jpg");
@@ -48,7 +44,7 @@ h2 {
 }
 
 canvas {
-  margin: auto;
+  margin-top: auto;
   background-color: blanchedalmond;
   border: 1px solid black;
   max-height: 90vh;
@@ -70,3 +66,4 @@ canvas {
   color: lightgrey;
   text-shadow: 0 0 8px black;
 }
+

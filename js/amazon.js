@@ -9,7 +9,7 @@ class Amazon extends Character {
     this.image = new Image();
     this.image.src = './../img/Amazon/amazon-right-1.png';
     this.life = 1;
-    this.speed = 3;
+    this.speed = 10;
     this.sprites = {
       up1: './../img/amazon/amazon-up-1.png',
       up2: './../img/amazon/amazon-up-2.png',

@@ -1,61 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Maze runner</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-    <div id="containerr">
-        <canvas id="canvas" class="testing" width="1200px" height="600px"></canvas>
-        <div id="testing" class="home">
-          <div class="d-flex justify-content-around">
-              <img id="amazon-intro" class="img-fluid amazon-img" src ="img/Amazon/amazon-intro-bw.png"/>
-              <img class="img-fluid centerlogo" src ="img/mazw runner.png"/>
-              <img id="barbarian-intro" class="img-fluid barbarian-img" src ="img/Barbarian/barbarian-intro-bw.png"/>
-        </div>
-        <div class="d-flex justify-content-between text">
-          <div id="amazon-habilities" class="col-3">
-            <h2 class="speed">HEALTH</h2>
-            <img src="img/Amazon/health.png"/>
-            <h2 class="speed">SPEED</h2>
-            <img src="img/Amazon/speed.png"/>
-          </div>
-          <div id="player" class="col-4">
-            <h1> SELECT PLAYER</h1>
-          </div>
-          <div id="barbarian-habilities" class="col-3">
-              <h2 class="speed">HEALTH</h2>
-              <img src="img/barbarian/health.png"/>
-              <h2 class="speed">SPEED</h2>
-              <img src="img/barbarian/speed.png"/>
-            </div>
-        </div>
+  <div class="container-fluid d-flex justify-content-center">
+
+    <canvas id="canvas" class="testing" width="1200px" height="600px">
+    </canvas>
+
+    <div id="testing" class="home">
+
+      <div class="d-flex justify-content-around">
+        <img id="amazon-intro" class="img-fluid amazon-img" src="img/Amazon/amazon-intro-bw.png" />
+        <img class="img-fluid centerlogo" src="img/mazw runner.png" />
+        <img id="barbarian-intro" class="img-fluid barbarian-img" src="img/Barbarian/barbarian-intro-bw.png" />
       </div>
-            <!-- <button id="amazon" onclick="game.showCanvasScreen('amazon')">Amazon</button>
-            <button id="barbarian" onclick="game.showCanvasScreen('barbarian')">Barbarian</button> -->
-          
+
+      <div class="d-flex justify-content-between text">
+
+        <div id="amazon-habilities" class="col-3">
+          <h2 class="speed">HEALTH</h2>
+          <img src="img/Amazon/health.png" />
+          <h2 class="speed">SPEED</h2>
+          <img src="img/Amazon/speed.png" />
+        </div>
+
+        <div id="player" class="col-4">
+          <h1> SELECT PLAYER</h1>
+        </div>
+
+        <div id="barbarian-habilities" class="col-3">
+          <h2 class="speed">HEALTH</h2>
+          <img src="img/barbarian/health.png" />
+          <h2 class="speed">SPEED</h2>
+          <img src="img/barbarian/speed.png" />
+        </div>
+
       </div>
-    
-      
-    <script src="js/items/escape.js"></script>
-    <script src="js/items/armour.js"></script>
-    <script src="js/items/enemy.js"></script>
-    <script src="js/items/pills.js"></script>
-    <script src="js/items/boots.js"></script>
-    <script src="js/items/potion.js"></script>
-    <script src="js/character.js"></script>
-    <script src="js/amazon.js"></script>
-    <script src="js/barbarian.js"></script>
-    <script src="js/controls.js"></script>
-    <script src="js/maze-generator.js"></script>
+    </div>
+  </div>
+
+
+  <script src="js/items/escape.js"></script>
+  <script src="js/items/armour.js"></script>
+  <script src="js/items/enemy.js"></script>
+  <script src="js/items/pills.js"></script>
+  <script src="js/items/boots.js"></script>
+  <script src="js/items/potion.js"></script>
+  <script src="js/character.js"></script>
+  <script src="js/amazon.js"></script>
+  <script src="js/barbarian.js"></script>
+  <script src="js/controls.js"></script>
+  <script src="js/generate-maze.js"></script>
+  <script src="js/maze-generator.js"></script>
   <script src="js/game.js"></script>
   <script src="js/main.js"></script>
   <script src="js/index.js"></script>
-  
+
 
 </body>
+
 </html>

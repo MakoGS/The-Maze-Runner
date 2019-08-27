@@ -8,7 +8,7 @@ class Controls {
   setKeyBindings (handlers) {
     // We're expecting handlers to be an object of function (methods)
     // That has a up, right, down and left methods
-    window.addEventListener('keydown', event => {
+    window.addEventListener('keyup', event => {
       const key = event.keyCode;
       if (key >= 37 && key <= 40) {
         event.preventDefault();

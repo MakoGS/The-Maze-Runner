@@ -11,7 +11,8 @@ class Game {
     this.timer = 0;
     this.SPEED = 0.05;
     this.controls = new Controls(this);
-    this.controls.setKeyBindings()
+    this.controls.setKeyBindings();
+    this.enemy = new Enemy(this);
   }
 
   handleControl(direction) {
@@ -72,13 +73,13 @@ class Game {
       this.hideScreen('testing');
       this.showScreen("canvas");
       this.startGame();
-      let maze = this.maze.newMaze(5,5)
-      console.log(maze[1]);
+      
       
 }
 update() {
-  //this.context.clearRect(0,0,this.width,this.height);
-  this.maze.runMaze();
+  this.context.clearRect(0,0,this.width,this.height);
+  this.maze.draw()
+  this.enemy.drawEnemy();
   this.character.drawCharacter()
 
 }

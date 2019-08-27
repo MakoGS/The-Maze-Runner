@@ -12,40 +12,47 @@ class Character {
     this.pills = new Pills(this);
     this.potion = new Potion(this);
     this.escape = new Escape(this);
-    this.row = 5;
-    this.col = 5;
+    this.row = 0;
+    this.col = 0;
     this.direction = 'down';
   }
 
   drawCharacter() {
-    this.game.context.drawImage(this.image, 50, 50,);
+    this.game.context.drawImage(this.image, this.row, this.col);
   }
 test() {
   console.log('test')
 }
   move (direction) {
+    const width = this.game.width;
+    const height = this.game.height;
+    const gridRows = 10;
+    const gridColumns = 10;
+    const cellWidth = width / gridRows;
+    const cellHeight = height / gridColumns;
+    
     switch (direction) {
       case 'up':
-          this.col -= 1;
+          this.col -= 1 * this.speed;
           this.spritersUp();
           this.checkCollision();
           this.checkItemOrEnemy();
         break;
       case 'right':
         console.log('right');
-          this.row += 1;
+          this.row += cellWidth;
           this.spritersRight();
           this.checkCollision();
           this.checkItemOrEnemy();
         break;
       case 'down':
-          this.col += 1;
+          this.col += 1 * this.speed;
           this.spritersDown();
           this.checkCollision();
           this.checkItemOrEnemy();
         break;
       case 'left':
-          this.row -= 1;
+          this.row -= 1 * this.speed;
             this.spritersLeft();
             this.checkCollision();
             this.checkItemOrEnemy();
@@ -93,17 +100,18 @@ test() {
 
     //CHECK COLLISION
     checkCollision() {
-      // if (this.row < 1) {
-      //   this.row += 1;
+      // if (this.col < 10) {
+      //   this.col += 10;
       // }
-      // if (this.row < 1) {
-      //   this.row += 1;
+      // if (this.row > 1200) {
+      //   this.row -= 10;
       // }
-      // if (this.row < 1) {
-      //   this.row += 1;
+      // if (this.col > 10) {
+      //   this.row -= 100;
       // }
-      // if (this.row < 1) {
-      //   this.row += 1;
+      // if (this.row < 0) {
+      //   console.log('test')
+      //   this.row += 100;
       // }
   
     }

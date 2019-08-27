@@ -1,101 +1,60 @@
 class MazeGenerator {
-
-  constructor(game) {
-    this.game = game;
-    this.image = new Image();
-    this.image.src = './../img/walls/ground.png';
-  }
-
-  newMaze(x, y) {
-
-    // Establish variables and starting grid
-    var totalCells = x * y;
-    var cells = new Array();
-    var unvis = new Array();
-    for (var i = 0; i < y; i++) {
-      cells[i] = new Array();
-      unvis[i] = new Array();
-      for (var j = 0; j < x; j++) {
-        cells[i][j] = [0, 0, 0, 0];
-        unvis[i][j] = true;
-      }
+    constructor(game) {
+      this.game = game;
+      this.canvas = canvas;
+      this.ctx = this.game.context;
+      this.matrix = generateMaze();
+      console.log(this.game.width);
     }
-
-    // Set a random position to start from
-    var currentCell = [Math.floor(Math.random() * y), Math.floor(Math.random() * x)];
-    var path = [currentCell];
-    unvis[currentCell[0]][currentCell[1]] = false;
-    var visited = 1;
-
-    // Loop through all available cell positions
-    while (visited < totalCells) {
-      // Determine neighboring cells
-      var pot = [
-        [currentCell[0] - 1, currentCell[1], 0, 2],
-        [currentCell[0], currentCell[1] + 1, 1, 3],
-        [currentCell[0] + 1, currentCell[1], 2, 0],
-        [currentCell[0], currentCell[1] - 1, 3, 1]
-      ];
-      var neighbors = new Array();
-
-      // Determine if each neighboring cell is in game grid, and whether it has already been checked
-      for (var l = 0; l < 4; l++) {
-        if (pot[l][0] > -1 && pot[l][0] < y && pot[l][1] > -1 && pot[l][1] < x && unvis[pot[l][0]][pot[l][1]]) {
-          neighbors.push(pot[l]);
+    draw () {
+      const matrix = this.matrix;
+      for (let row of matrix) {
+        for (let cell of row) {
+          this._paintCell(cell);
         }
       }
-
-      // If at least one active neighboring cell has been found
-      if (neighbors.length) {
-        // Choose one of the neighbors at random
-        let next = neighbors[Math.floor(Math.random() * neighbors.length)];
-
-        // Remove the wall between the current cell and the chosen neighboring cell
-        cells[currentCell[0]][currentCell[1]][next[2]] = 1;
-        cells[next[0]][next[1]][next[3]] = 1;
-
-        // Mark the neighbor as visited, and set it as the current cell
-        unvis[next[0]][next[1]] = false;
-        visited++;
-        currentCell = [next[0], next[1]];
-        path.push(currentCell);
-      }
-      // Otherwise go back up a step and keep going
-      else {
-        currentCell = path.pop();
-      }
     }
-    return cells;
-  }
+    _paintCell(cell) {
+      const context = this.ctx;
+      const width = this.game.width;
+      const height = this.game.height;
+      console.log(this.game.width);
+      const gridRows = 10;
+      const gridColumns = 10;
+      context.save();
+      const cellWidth = width / gridRows;
+      const cellHeight = height / gridColumns;
 
-
-  runMaze() {
-    let x = 0;
-    let y = 0;
-    let template = this.newMaze(10, 10)
-
-    var xy = 10;
-    var maze = [];
-
-    for (var i = 0; i < xy * xy; i++) {
-      maze.push({
-        "x": x,
-        "y": y,
-        "state": template[i]
-      });
-      if (x == xy - 1) {
-        y++;
-        x = 0;
-      } else {
-        x++;
+      const positionX = cell.column * cellWidth;
+      const positionY = cell.row * cellHeight;
+      context.fillStyle = "#333"
+      context.translate(positionX, positionY);
+      
+      for (let side in cell.walls) {
+        if (cell.walls[side]) {
+          context.beginPath();
+          switch (side) {
+            case 'top':
+              context.moveTo(0, 0);
+              context.lineTo(cellWidth, 0);
+              break;
+            case 'right':
+              context.moveTo(cellWidth, 0);
+              context.lineTo(cellWidth, cellHeight);
+              break;
+            case 'bottom':
+              context.moveTo(0, cellHeight);
+              context.lineTo(cellWidth, cellHeight);
+              break;
+            case 'left':
+              context.moveTo(0, 0);
+              context.lineTo(0, cellHeight);
+              break;
+          }
+          context.stroke();
+          context.closePath();
+        }
       }
+      context.restore();
     }
-
-    for (var i = 0; i < xy * xy; i++) {
-      if (maze[i].state == 1 || maze[i].state == "1") {
-        console.log('epa')
-        this.game.context.drawImage(this.image, maze[i].x * 32, maze[i].y * 32, 32, 32);
-      }
-    }
-  }
-}
+   }
