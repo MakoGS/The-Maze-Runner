@@ -3,17 +3,18 @@
 class Pills {
   constructor(game) {
     this.game = game
-    this.pills = new Image();
-    this.pills.src = './../img/items/pills.png';
-    this.col = Math.floor(Math.random() * 10);;
-    this.row = Math.floor(Math.random() * 10);;
+    this.image = new Image();
+    this.image.src = './../img/items/pills.png';
+    this.row = (CANVAS_WIDTH /10) * (Math.floor(Math.random() * 9));
+    this.col = (CANVAS_HEIGHT /10) * (Math.floor(Math.random() * 9));
+    
   }
   drawPills() {
-    this.game.context.drawImage(this.image, this.row, this.col);
+    this.game.context.drawImage(this.image, this.row, this.col, 78, 52);
   }
-pills() {
-  this.character.speed--
-  this.col = null;
-  this.row = null;
-}
+  pills() {
+    this.game.character.verticalSpeed /= 2;
+    this.game.character.horizontalSpeed /= 2;
+    this.col = 9000;
+  }
 }

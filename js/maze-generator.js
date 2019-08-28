@@ -4,7 +4,6 @@ class MazeGenerator {
       this.canvas = canvas;
       this.ctx = this.game.context;
       this.matrix = generateMaze();
-      console.log(this.game.width);
     }
     draw () {
       const matrix = this.matrix;
@@ -18,7 +17,6 @@ class MazeGenerator {
       const context = this.ctx;
       const width = this.game.width;
       const height = this.game.height;
-      console.log(this.game.width);
       const gridRows = 10;
       const gridColumns = 10;
       context.save();

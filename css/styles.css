@@ -41,29 +41,78 @@ h2 {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
+  padding-bottom: 2%;
+  width:100vw;
+  height:100vh;
 }
 
 canvas {
   margin-top: auto;
   background-color: blanchedalmond;
   border: 1px solid black;
-  max-height: 90vh;
-  max-width: 95vw;
+  max-height: 100vh;
+  /* max-width: 100vw;  */
 }
 
-.testing {
-  width: 100%;
-  height: 100%;
-  position: absolute;
+.hideScreen {
   display: none;
 }
 
-#player h1 {
+.player h1 {
+  text-align: center;
   font-family: 'Staatliches', cursive;
   font-size: 2.5rem;
   letter-spacing: 6px;
   font-weight: bold;
   color: lightgrey;
   text-shadow: 0 0 8px black;
+  margin-top: -10%;
+  margin-bottom: 5%;
 }
+/*  */
 
+button {
+  color: #617537;
+  background-color: #c2c2c2;
+  transition: 1s;
+  border: 2px solid;
+  font-family: 'Staatliches', cursive;
+  letter-spacing: 5px;
+  line-height: 1;
+  margin: 0.5em;
+  margin-left:0em;
+  padding: 1em 2em;
+}
+ 
+button:hover { 
+    background-color: #617537;
+    color: #fff;
+  }
+
+#scorescreen h2, #restart {
+  text-align: center;
+    width:90%;
+    color: #617537;
+    background-color: #d8d8d8;
+    border: 2px solid;
+    font-size: 17px;
+    letter-spacing: 5px;
+    line-height: 1;
+    padding: 1em 1em;
+    margin-top: 1em;
+  }
+
+  .blink_me {
+    animation: blinker 2s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .instructions {
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.5);
+  }

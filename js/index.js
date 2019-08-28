@@ -55,13 +55,3 @@ $barbarianImage.addEventListener('click', (e) =>  {
   playBarbarianSound()
   game.showCanvasScreen('barbarian')
 });
-
-// Blinking select player text animation
-window.addEventListener("load", function() {
-  var f = document.getElementById('player');
-  setInterval(function() {
-      f.style.display = (f.style.display == 'none' ? '' : 'none');
-  }, 1000);
-
-}, false);
-

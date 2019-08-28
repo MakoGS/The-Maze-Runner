@@ -3,38 +3,38 @@
 class Boots {
   constructor(game) {
     this.game = game
-    this.boots = new Image();
-    this.boots.src = './../img/items/boots.png';
-    this.col = Math.floor(Math.random() * 10);;
-    this.row = Math.floor(Math.random() * 10);;
+    this.image = new Image();
+    this.image.src = './../img/items/boots.png';
+    this.row = (CANVAS_WIDTH /10) * (Math.floor(Math.random() * 9));
+    this.col = (CANVAS_HEIGHT /10) * (Math.floor(Math.random() * 9));
+    
   }
   drawBoots() {
-    this.game.context.drawImage(this.image, this.row, this.col);
+    this.game.context.drawImage(this.image, this.row, this.col, 78, 52);
   }
-  //BOOTS
   boots() {
-  this.character.speed++;
-  this.col = null;
-  this.row = null;
-    //1
-    context.beginPath();
-    context.moveTo(this.amazon.controls.row - 5, this.amazonControls.col + 1);
-    context.lineTo(5, this.amazonControls.col - 5);
-    context.stroke()
-    context.closePath();
-
-    //2
-    context.beginPath();
-    context.moveTo(this.amazon.controls.row - 10, this.amazonControls.col + 4);
-    context.lineTo(5, this.amazonControls.col - 5);
-    context.stroke()
-    context.closePath();
-
-    //3
-    context.beginPath();
-    context.moveTo(this.amazon.controls.row - 5, this.amazonControls.col + 8 );
-    context.lineTo(5, this.amazonControls.col - 5);
-    context.stroke()
-    context.closePath();
+    this.game.character.verticalSpeed *= 2;
+    this.game.character.horizontalSpeed *= 2;
+    this.col = 9000;
   }
 }
+    // //1
+    // context.beginPath();
+    // context.moveTo(this.amazon.controls.row - 5, this.amazonControls.col + 1);
+    // context.lineTo(5, this.amazonControls.col - 5);
+    // context.stroke()
+    // context.closePath();
+
+    // //2
+    // context.beginPath();
+    // context.moveTo(this.amazon.controls.row - 10, this.amazonControls.col + 4);
+    // context.lineTo(5, this.amazonControls.col - 5);
+    // context.stroke()
+    // context.closePath();
+
+    // //3
+    // context.beginPath();
+    // context.moveTo(this.amazon.controls.row - 5, this.amazonControls.col + 8 );
+    // context.lineTo(5, this.amazonControls.col - 5);
+    // context.stroke()
+    // context.closePath();

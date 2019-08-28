@@ -14,44 +14,74 @@
 <body>
   <div class="container-fluid d-flex justify-content-center">
 
-    <canvas id="canvas" class="testing" width="1200px" height="600px">
+    
+    <div id="scorescreen" class="hideScreen container-fluid">
+        <h2 id="time">Time: 0</h2>
+        <h2 id="score">Score: 0</h2>
+        <h2 id="life">Life: 0</h2>
+        <h2 id="speed">Speed: 0</h2>
+      <button class="raise">Home</button>
+      <button class="raise">Reset</button>
+      <button class="raise">PAUSE</button>
+  </div>  
+  
+  <canvas id="canvas" class="hideScreen" width="1100" height="600">
     </canvas>
+  
 
-    <div id="testing" class="home">
-
+    <div id="home" class="home">
       <div class="d-flex justify-content-around">
         <img id="amazon-intro" class="img-fluid amazon-img" src="img/Amazon/amazon-intro-bw.png" />
         <img class="img-fluid centerlogo" src="img/mazw runner.png" />
         <img id="barbarian-intro" class="img-fluid barbarian-img" src="img/Barbarian/barbarian-intro-bw.png" />
       </div>
-
       <div class="d-flex justify-content-between text">
 
-        <div id="amazon-habilities" class="col-3">
-          <h2 class="speed">HEALTH</h2>
-          <img src="img/Amazon/health.png" />
-          <h2 class="speed">SPEED</h2>
-          <img src="img/Amazon/speed.png" />
+          <div id="amazon-habilities" class="col-3">
+            <h2 class="speed">HEALTH</h2>
+            <img src="img/Amazon/health.png" />
+            <h2 class="speed">SPEED</h2>
+            <img src="img/Amazon/speed.png" />
+          </div>
+  
+          <div id="player" class="player col-5">
+            <h1 class="blink_me"> SELECT PLAYER</h1>
+            <p class="instructions"><img src="img/arrow-keys-icon-4.jpg" width="40px"/> Use direction arrows to move along the maze. <br/>
+              <img src="img/items/enemy.png" width="40px"/> Enemies reduce your life by 1 point.
+              <br/>
+              <img src="img/items/armour.png" width="40px"/> Armour increments your life by 1.
+              <br/>
+              <img src="img/items/boots.png" width="40px"/> Boots increment 50% of your speed.
+              <br/>
+              <img src="img/items/pills.png" width="40px"/> Pills make you sleepy and will reduce 50% your speed. <br/>
+              <img src="img/items/potions.png" width="40px"/> No risk no glory! Potions will give you random attributes.<br/>
+          </p>
+          </div>
+  
+          <div id="barbarian-habilities" class="col-3">
+            <h2 class="speed">HEALTH</h2>
+            <img src="img/barbarian/health.png" />
+            <h2 class="speed">SPEED</h2>
+            <img src="img/barbarian/speed.png" />
+          </div>
+  
         </div>
-
-        <div id="player" class="col-4">
-          <h1> SELECT PLAYER</h1>
-        </div>
-
-        <div id="barbarian-habilities" class="col-3">
-          <h2 class="speed">HEALTH</h2>
-          <img src="img/barbarian/health.png" />
-          <h2 class="speed">SPEED</h2>
-          <img src="img/barbarian/speed.png" />
-        </div>
-
       </div>
-    </div>
+
+      <div id="gameover" class="home hideScreen">
+          <div class="d-flex justify-content-center">
+            <img class="img-fluid" src="img/gameover.png" />
+          </div>
+              <div class="d-flex justify-content-center">
+                <button id="restart" class="restart">RESTART</button>
+              </div>
+          </div>
   </div>
 
-
-  <script src="js/items/escape.js"></script>
+  
+  <script src="js/globals.js"></script>
   <script src="js/items/armour.js"></script>
+  <script src="js/items/escape.js"></script>
   <script src="js/items/enemy.js"></script>
   <script src="js/items/pills.js"></script>
   <script src="js/items/boots.js"></script>

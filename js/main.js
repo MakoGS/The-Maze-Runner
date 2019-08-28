@@ -3,9 +3,6 @@
 const $canvas = document.querySelector('canvas');
 const game = new Game($canvas);
 
-const canvasWidth = $canvas.width;
-const canvasHeight = $canvas.height;
-
 window.onload = game.homeGame();
 
 // window.onload = game.startGame();

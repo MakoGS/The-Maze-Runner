@@ -3,17 +3,17 @@
 class Armour  {
   constructor(game) {
     this.game = game
-    this.armour = new Image();
-    this.armour.src = './../img/items/armour.png';
-    this.col = Math.floor(Math.random() * 10);;
-    this.row = Math.floor(Math.random() * 10);;
+    this.image = new Image();
+    this.image.src = './../img/items/armour.png';
+    this.row = (CANVAS_WIDTH /10) * (Math.floor(Math.random() * 9));
+    this.col = (CANVAS_HEIGHT /10) * (Math.floor(Math.random() * 9));
+    
   }
   drawArmour() {
-    this.game.context.drawImage(this.image, this.row, this.col);
+    this.game.context.drawImage(this.image, this.row, this.col, 78, 52);
   }
   armour() {
-    this.character.life++
-    this.col = null;
-    this.row = null;
+    this.game.character.life += 1;
+    this.col = 9000;
   }
 }

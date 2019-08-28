@@ -4,17 +4,18 @@ class Enemy {
     this.canvas = canvas;
     this.image = new Image();
     this.image.src = './../img/items/enemy.png';
-    this.row = this.game.width * (Math.floor(Math.random() * 9));
-    this.col = this.game.height * (Math.floor(Math.random() * 9));
-
-   // console.log(this.row)
+    this.row = (CANVAS_WIDTH /10) * (Math.floor(Math.random() * 9));
+    this.col = (CANVAS_HEIGHT /10) * (Math.floor(Math.random() * 9));
+    
   }
   drawEnemy() {
-    this.game.context.drawImage(this.image, 300, 300);
+    for (let i = 2; i < LEVEL + 2; i++) {
+    this.game.context.drawImage(this.image, this.row, this.col, 78, 52);
+  }
   }
   enemy() {
-    this.character.life--
-    this.col = null;
-    this.row = null;
+    this.game.character.life -= 1
+    this.col = 9000;
+    this.row = 9000; 
   }
 }

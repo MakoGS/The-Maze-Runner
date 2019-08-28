@@ -8,8 +8,9 @@ class Amazon extends Character {
     // this.controls.amazonControls(this);
     this.image = new Image();
     this.image.src = './../img/Amazon/amazon-right-1.png';
-    this.life = 1;
-    this.speed = 10;
+    this.life = 2;
+    // this.horizontalSpeed = CELL_WIDTH;
+    // this.verticalSpeed = CELL_HEIGHT;
     this.sprites = {
       up1: './../img/amazon/amazon-up-1.png',
       up2: './../img/amazon/amazon-up-2.png',
@@ -20,8 +21,5 @@ class Amazon extends Character {
       left1: './../img/amazon/amazon-left-1.png',
       left2: './../img/amazon/amazon-left-2.png',
     }
-  }
-  test() {
-    console.log('test')
   }
   }

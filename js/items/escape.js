@@ -3,17 +3,20 @@
 class Escape {
   constructor(game) {
     this.game = game
-    this.escape = new Image();
-    this.escape.src = './../img/items/escape.png';
-    this.col = Math.floor(Math.random() * 10);;
-    this.row = Math.floor(Math.random() * 10);;
+    this.image = new Image();
+    this.image.src = './../img/items/escape.png';
+    this.row = (CELL_WIDTH * 1) 
+    this.col = (CELL_HEIGHT * 2) 
+    
   }
   drawEscape() {
-    this.game.context.drawImage(this.image, this.row, this.col);
+    this.game.context.drawImage(this.image, this.row, this.col, 78, 52);
   }
   escape() {
-    this.col = null;
-    this.row = null;
-    //nextLevelfunction();
+    console.log('exit')
+    LEVEL += 2;
+    this.game.hideScreen('canvas');
+    this.game.hideScreen('scorescreen');
+    this.game.showScreen('gameover');
   }
 }

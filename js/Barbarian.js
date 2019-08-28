@@ -9,7 +9,8 @@ class Barbarian extends Character {
     this.image = new Image();
     this.image.src = './../img/barbarian/barbarian-right-1.png';
     this.life = 2;
-    this.speed = 6;
+    this.horizontalSpeed = CELL_WIDTH / 2;
+    this.verticalSpeed = CELL_HEIGHT / 2;
     this.sprites = {
       up1: './../img/barbarian/barbarian-up-1.png',
       up2: './../img/barbarian/barbarian-up-2.png',
