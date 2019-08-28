@@ -55,3 +55,15 @@ $barbarianImage.addEventListener('click', (e) =>  {
   playBarbarianSound()
   game.showCanvasScreen('barbarian')
 });
+
+//RESTART GAME
+const $reset = document.getElementById('reset');
+const $restart = document.getElementById('restart');
+
+$restart.addEventListener('click', (e) =>  {
+  game.homeGame();
+});
+
+$reset.addEventListener('click', (e) =>  {
+  game.homeGame();
+});

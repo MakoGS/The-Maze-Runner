@@ -5,18 +5,16 @@ class Escape {
     this.game = game
     this.image = new Image();
     this.image.src = './../img/items/escape.png';
-    this.row = (CELL_WIDTH * 1) 
-    this.col = (CELL_HEIGHT * 2) 
+    this.row = 0;
+    this.col = this.game.cellWidth * (1 );
+    // this.row = this.game.cellHeight * (this.game.rows - 1);
+    // this.col = this.game.cellWidth * (this.game.columns - 1);
     
   }
   drawEscape() {
-    this.game.context.drawImage(this.image, this.row, this.col, 78, 52);
+    this.game.context.drawImage(this.image, this.col, this.row, this.game.cellWidth - 10, this.game.cellHeight - 10);
   }
   escape() {
-    console.log('exit')
-    LEVEL += 2;
-    this.game.hideScreen('canvas');
-    this.game.hideScreen('scorescreen');
-    this.game.showScreen('gameover');
+    this.game.levelUp()
   }
 }

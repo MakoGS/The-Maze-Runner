@@ -16,6 +16,7 @@ class Boots {
     this.game.character.verticalSpeed *= 2;
     this.game.character.horizontalSpeed *= 2;
     this.col = 9000;
+    BOOTS_MODE += 1;
   }
 }
     // //1

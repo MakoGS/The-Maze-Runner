@@ -20,9 +20,9 @@
         <h2 id="score">Score: 0</h2>
         <h2 id="life">Life: 0</h2>
         <h2 id="speed">Speed: 0</h2>
-      <button class="raise">Home</button>
-      <button class="raise">Reset</button>
-      <button class="raise">PAUSE</button>
+      <button>Home</button>
+      <button id="reset">Reset</button>
+      <button>PAUSE</button>
   </div>  
   
   <canvas id="canvas" class="hideScreen" width="1100" height="600">
@@ -72,8 +72,9 @@
           <div class="d-flex justify-content-center">
             <img class="img-fluid" src="img/gameover.png" />
           </div>
-              <div class="d-flex justify-content-center">
-                <button id="restart" class="restart">RESTART</button>
+              <div class="d-flex justify-content-center row">
+                  <p id="finalScore">Your score is:</p>
+                <button id="restart">RESTART</button>
               </div>
           </div>
   </div>

@@ -6,43 +6,38 @@ let spritersLeft = 0
 class Character {
   constructor(game) {
     this.game = game;
-    this.armour = new Armour(this);
-    this.enemy = new Enemy(this);
-    this.boots = new Boots(this);
-    this.pills = new Pills(this);
-    this.potion = new Potion(this);
-    this.escape = new Escape(this);
     this.row = 0;
     this.col = 0;
-    this.speed = 1;
-    this.position = game.maze.matrix[POSITION_X][POSITION_Y];
+    this.cellHeight = this.game.cellHeight;
+    this.cellWidth = this.game.cellWidth;
+    this.position = game.maze.matrix[POSITION_Y][POSITION_X];
   }
 
   drawCharacter() {
-    this.game.context.drawImage(this.image, this.row, this.col, CELL_WIDTH/2, CELL_HEIGHT);
+    this.game.context.drawImage(this.image, this.col, this.row, this.cellWidth/2,this.cellHeight);
   }
   move(direction) {
     switch (direction) {
       case 'up':
-        this.col -= CELL_HEIGHT;
+        this.row -= this.cellHeight;
         this.spritersUp();
         this.checkCollisionTop();
         this.checkItemOrEnemy();
         break;
       case 'right':
-        this.row += CELL_WIDTH;        
+        this.col += this.cellWidth;        
         this.spritersRight();
         this.checkCollisionRight();
         this.checkItemOrEnemy();
         break;
       case 'down':
-        this.col += CELL_HEIGHT;        
+        this.row += this.cellHeight;        
         this.spritersDown();
         this.checkCollisionBottom();
         this.checkItemOrEnemy();
         break;
       case 'left':
-        this.row -= CELL_WIDTH;        
+        this.col -= this.cellWidth;        
         this.spritersLeft();
         this.checkCollisionLeft();
         this.checkItemOrEnemy();
@@ -90,28 +85,28 @@ class Character {
 
   //CHECK COLLISION
   checkCollisionTop() {
-    if (POSITION_Y < 0 || this.position.walls.top) {
-      this.col += CELL_HEIGHT
+    if (POSITION_Y < 0 || this.position.walls.up) {
+      this.row += this.cellHeight
     }
-    else this.position = game.maze.matrix[POSITION_Y -=1 ][POSITION_X]  
+    else this.position = game.maze.matrix[POSITION_Y -=1][POSITION_X]  
   }
   
   checkCollisionBottom() {
-    if (POSITION_Y > 9 || this.position.walls.bottom) {
-      this.col -= CELL_HEIGHT
+    if (POSITION_Y > this.game.rows || this.position.walls.down) {
+      this.row -= this.cellHeight
     }
-    else this.position = game.maze.matrix[POSITION_Y +=1 ][POSITION_X]   
+    else this.position = game.maze.matrix[POSITION_Y += 1][POSITION_X]   
   }
   
   checkCollisionRight() {
-    if (POSITION_X > 9 || this.position.walls.right) {
-      this.row -= CELL_WIDTH
+    if (POSITION_X > this.game.columns || this.position.walls.right) {
+      this.col -= this.cellWidth
     }
     else this.position = game.maze.matrix[POSITION_Y][POSITION_X += 1]
   }
   checkCollisionLeft() {
     if (POSITION_X < 0 || this.position.walls.left) {
-      this.row += CELL_WIDTH
+      this.col += this.cellWidth
     }
     else this.position = game.maze.matrix[POSITION_Y][POSITION_X -=1] 
   }
@@ -131,15 +126,19 @@ class Character {
     if (this.row === this.game.pills.row && this.col === this.game.pills.col) {
       this.game.pills.pills();
     }
-    if (this.row === this.game.enemy.row && this.col === this.game.enemy.col) {
-      this.game.enemy.enemy();
-    }
+
+    this.game.enemies.map(enemy=> {
+      if ((this.row === enemy.row) && (this.col === enemy.col)) {
+       enemy.enemy();
+      }
+    })
+
     //CHECK escape
-    if (this.row === this.escape.row && this.col === this.escape.col) {
-      this.escape.escape();
+    if (this.row === this.game.escape.row && this.col === this.game.escape.col) {
+      this.game.escape.escape();
     }
     if (this.life === 0) {
-      this.row = 90000 //gameover();
+      this.game.gameOver();
     }
   }
 }

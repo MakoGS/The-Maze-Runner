@@ -4,8 +4,13 @@ class Game {
 
   constructor(canvas) {
     this.canvas = canvas;
-    this.width = this.canvas.width
-    this.height = this.canvas.height
+    this.width = this.canvas.width;
+    this.height = this.canvas.height;
+    this.level = 10;
+    this.rows = this.level;
+    this.columns = this.level;
+    this.cellWidth = parseInt(this.width / this.columns);
+    this.cellHeight = parseInt(this.height / this.rows);
     this.context = this.canvas.getContext('2d');
     this.maze = new MazeGenerator(this);
     this.timer = 0;
@@ -13,12 +18,37 @@ class Game {
     this.controls = new Controls(this);
     this.controls.setKeyBindings();
     //items
+    this.enemies = [ new Enemy(this), new Enemy(this)]
     this.armour = new Armour(this);
     this.enemy = new Enemy(this);
     this.boots = new Boots(this);
     this.pills = new Pills(this);
     this.potion = new Potion(this);
     this.escape = new Escape(this);
+  }
+
+  levelUp() {
+    this.level  += 2
+    this.rows = this.level;
+    this.columns = this.level;
+    this.cellWidth = parseInt(this.width / this.columns);
+    this.cellHeight = parseInt(this.height / this.rows);
+    this.maze = new MazeGenerator(this);
+    this.enemies = [ new Enemy(this), new Enemy(this)]
+    this.enemies.push(new Enemy(this));
+    this.armour = new Armour(this);
+  
+    this.boots = new Boots(this);
+    this.pills = new Pills(this);
+    this.potion = new Potion(this);
+    this.escape = new Escape(this);
+    this.character = new Amazon(this);
+    this.controls = new Controls(this); 
+    POSITION_X = 0;
+    POSITION_Y = 0;
+    this.character.position = game.maze.matrix[POSITION_Y][POSITION_X];
+    this.character.cellHeight = this.cellHeight;
+    this.character.cellWidth = this.cellWidth;
   }
 
   handleControl(direction) {
@@ -41,6 +71,9 @@ class Game {
 
   homeGame() {
     this.hideScreen('canvas')
+    this.showScreen('home')
+    this.hideScreen('scorescreen')
+    this.hideScreen('gameover')
   }
   startGame() {
     this.loop(0);
@@ -94,8 +127,12 @@ class Game {
     this.context.clearRect(0, 0, this.width, this.height);
     //draw maze
     this.maze.draw()
-    //draw items
-    this.enemy.drawEnemy();
+    //draw items 
+    //draw enemy by level
+    for (let number of this.enemies) {
+      number.drawEnemy()
+    }
+    // this.enemy.drawEnemy();
     this.boots.drawBoots();
     this.armour.drawArmour();
     this.pills.drawPills();
@@ -104,9 +141,10 @@ class Game {
     this.character.drawCharacter()
     this.updateMenu()
   }
-
-  // runMaze() {
-  //   this will ran function in maze-generator.js and next level screens
-  // }
+  gameOver() {
+    this.hideScreen('canvas');
+    this.hideScreen('scorescreen');
+    this.showScreen('gameover');
+  }
 
 }

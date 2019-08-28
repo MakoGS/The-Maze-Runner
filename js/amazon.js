@@ -9,6 +9,7 @@ class Amazon extends Character {
     this.image = new Image();
     this.image.src = './../img/Amazon/amazon-right-1.png';
     this.life = 2;
+    this.speed = 1;
     // this.horizontalSpeed = CELL_WIDTH;
     // this.verticalSpeed = CELL_HEIGHT;
     this.sprites = {

@@ -3,7 +3,7 @@ class MazeGenerator {
       this.game = game;
       this.canvas = canvas;
       this.ctx = this.game.context;
-      this.matrix = generateMaze();
+      this.matrix = generateMaze({rows: this.game.rows, columns: this.game.columns});
     }
     draw () {
       const matrix = this.matrix;
@@ -17,22 +17,22 @@ class MazeGenerator {
       const context = this.ctx;
       const width = this.game.width;
       const height = this.game.height;
-      const gridRows = 10;
-      const gridColumns = 10;
+      const gridRows = this.game.rows;
+      const gridColumns = this.game.columns;
+      
       context.save();
       const cellWidth = width / gridRows;
       const cellHeight = height / gridColumns;
 
       const positionX = cell.column * cellWidth;
       const positionY = cell.row * cellHeight;
-      context.fillStyle = "#333"
       context.translate(positionX, positionY);
-      
+      context.fillStyle = "#d8d8d8"
       for (let side in cell.walls) {
         if (cell.walls[side]) {
           context.beginPath();
           switch (side) {
-            case 'top':
+            case 'up':
               context.moveTo(0, 0);
               context.lineTo(cellWidth, 0);
               break;
@@ -40,7 +40,7 @@ class MazeGenerator {
               context.moveTo(cellWidth, 0);
               context.lineTo(cellWidth, cellHeight);
               break;
-            case 'bottom':
+            case 'down':
               context.moveTo(0, cellHeight);
               context.lineTo(cellWidth, cellHeight);
               break;
