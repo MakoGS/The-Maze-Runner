@@ -23,7 +23,7 @@ class Game {
     this.columns = this.level;
     this.cellWidth = parseInt(this.width / this.columns);
     this.cellHeight = parseInt(this.height / this.rows);
-    this.center = ((this.cellWidth / 2) / 2);
+    this.center = parseInt((this.cellWidth / 2) / 2);
 
     //generate maze
     this.maze = new MazeGenerator(this);

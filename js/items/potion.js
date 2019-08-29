@@ -10,26 +10,32 @@ class Potion extends Item {
   }
 
   draw() {
-    this.game.context.drawImage(this.image, this.row, this.col + this.game.center, this.sizeX, this.sizeY);
+    this.game.context.drawImage(this.image, this.col + this.game.center, this.row, this.sizeX, this.sizeY);
   }
 
   //POTION
-  catch() {
-    const potionOptions = ['pills', 'boots', 'armour', 'attack', 'transport']
+  catch () {
+    const potionOptions = ['lessTime', 'moreTime', 'armour', 'attack', 'morePoints', 'lessPoints', 'transport']
     let randomOption = Math.floor(Math.random() * potionOptions.length);
     let potionSelected = potionOptions[randomOption];
-    if (potionSelected === 'pills') {
-      this.character.speed--
-    } else if (potionSelected === 'boots') {
-      this.character.speed++
+    if (potionSelected === 'lessTime') {
+      this.game.character.time -= 10;
+    } else if (potionSelected === 'moreTime') {
+      this.game.character.time += 10;
     } else if (potionSelected === 'armour') {
-      this.character.life++
+      this.game.character.life += 1;
     } else if (potionSelected === 'attack') {
-      this.character.life--
+      this.game.character.life -= 1
+    } else if (potionSelected === 'morePoints') {
+      this.game.gameScore += 50;
+    } else if (potionSelected === 'lesspoints') {
+      this.game.gameScore -= 50;
     } else if (potionSelected === 'transport') {
-      //whatever
+      this.row = (this.game.cellHeight * 9);
+      this.col = (this.game.cellWidth * 9);
     }
-    this.col = null;
-    this.row = null;
+
+    this.col = 9000000;
+    this.row = 9000000;
   }
 }
