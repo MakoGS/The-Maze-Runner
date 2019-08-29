@@ -61,9 +61,14 @@ const $reset = document.getElementById('reset');
 const $restart = document.getElementById('restart');
 
 $restart.addEventListener('click', (e) =>  {
+  game.reset();
   game.homeGame();
 });
 
 $reset.addEventListener('click', (e) =>  {
+  game.reset();
   game.homeGame();
 });
+
+
+

@@ -19,3 +19,5 @@ let POSITION_Y = 0;
 //Player Speed
 let BOOTS_MODE = 0;
 
+//Timer
+

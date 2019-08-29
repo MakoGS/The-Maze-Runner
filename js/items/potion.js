@@ -1,19 +1,20 @@
 /* eslint-disable no-undef */
 
-class Potion {
+const potionImage = new Image();
+potionImage.src = './../img/items/potions.png';
+
+class Potion extends Item {
   constructor(game) {
-    this.game = game
-    this.potion = new Image();
-    this.potion.src = './../img/items/potions.png';
-    this.col = Math.floor(Math.random() * 10);;
-    this.row = Math.floor(Math.random() * 10);;
+    super(game);
+    this.image = potionImage;
   }
-  drawPotion() {
-    this.game.context.drawImage(this.image, this.row, this.col);
+
+  draw() {
+    this.game.context.drawImage(this.image, this.row, this.col, 50, 50);
   }
 
   //POTION
-  potion() {
+  catch() {
     const potionOptions = ['pills', 'boots', 'armour', 'attack', 'transport']
     let randomOption = Math.floor(Math.random() * potionOptions.length);
     let potionSelected = potionOptions[randomOption];

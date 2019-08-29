@@ -1,52 +1,58 @@
 /* eslint-disable no-undef */
 
 class Game {
-
   constructor(canvas) {
     this.canvas = canvas;
+    this.context = this.canvas.getContext('2d');
     this.width = this.canvas.width;
     this.height = this.canvas.height;
-    this.level = 10;
+    this.timer = 0;
+    this.SPEED = 0;
+    this.controls = new Controls(this);
+    this.controls.setKeyBindings();
+    this.items = [];
+    this.setUpGame(10);
+  }
+
+  setUpGame (level) {
+    this.level = level;
+    this.timer = 0;
+    this.gameStarted = Date.now();
     this.rows = this.level;
     this.columns = this.level;
     this.cellWidth = parseInt(this.width / this.columns);
     this.cellHeight = parseInt(this.height / this.rows);
-    this.context = this.canvas.getContext('2d');
     this.maze = new MazeGenerator(this);
-    this.timer = 0;
-    this.SPEED = 100;
-    this.controls = new Controls(this);
-    this.controls.setKeyBindings();
-    //items
-    this.enemies = [ new Enemy(this), new Enemy(this)]
-    this.armour = new Armour(this);
-    this.enemy = new Enemy(this);
-    this.boots = new Boots(this);
-    this.pills = new Pills(this);
-    this.potion = new Potion(this);
+    this.items = [];
+    // const probabilityOfHavingItems = 1 + (this.level - 10) / 6;
+    this.enemies = [];
+    for (let i = 0; i < 1 + (this.level - 10) / 2; i++) {
+      this.enemies.push(new Enemy(this));
+    }
+    const probabilityOfHavingItems = 1 + (this.level - 10) / 3;
+    for (let i = 0; i < probabilityOfHavingItems; i++) {
+      this.items.push(new Armour(this));
+    }
+    for (let i = 0; i < probabilityOfHavingItems; i++) {
+      this.items.push(new Boots(this));
+    }
+    for (let i = 0; i < probabilityOfHavingItems; i++) {
+      this.items.push(new Pills(this));
+    }
+    for (let i = 0; i < probabilityOfHavingItems; i++) {
+      this.items.push(new Potion(this));
+    }
     this.escape = new Escape(this);
   }
 
+  reset() {
+    this.setUpGame(10);
+  }
+
   levelUp() {
-    this.level  += 2
-    this.rows = this.level;
-    this.columns = this.level;
-    this.cellWidth = parseInt(this.width / this.columns);
-    this.cellHeight = parseInt(this.height / this.rows);
-    this.maze = new MazeGenerator(this);
-    this.enemies = [ new Enemy(this), new Enemy(this)]
-    this.enemies.push(new Enemy(this));
-    this.armour = new Armour(this);
-  
-    this.boots = new Boots(this);
-    this.pills = new Pills(this);
-    this.potion = new Potion(this);
-    this.escape = new Escape(this);
-    this.character = new Amazon(this);
-    this.controls = new Controls(this); 
-    POSITION_X = 0;
-    POSITION_Y = 0;
-    this.character.position = game.maze.matrix[POSITION_Y][POSITION_X];
+    this.setUpGame(this.level + 2);
+    this.character.row = 0;
+    this.character.col = 0;
     this.character.cellHeight = this.cellHeight;
     this.character.cellWidth = this.cellWidth;
   }
@@ -75,14 +81,15 @@ class Game {
     this.hideScreen('scorescreen')
     this.hideScreen('gameover')
   }
+
   startGame() {
     this.loop(0);
   }
+  
   loop(timestamp) {
-    if (this.timer < timestamp - this.SPEED) {
-      this.update();
-      this.timer = timestamp;
-    }
+    this.timer = Date.now() - (this.gameStarted || 0);    
+    this.update();
+    this.draw();
     window.requestAnimationFrame((timestamp) => this.loop(timestamp));
   }
 
@@ -101,46 +108,45 @@ class Game {
   showCanvasScreen(character) {
     switch (character) {
       case 'amazon':
-        //amazon
         this.character = new Amazon(this);
-
         break;
       case 'barbarian':
         this.character = new Barbarian(this);
         break;
-        //barbarian
     }
     this.hideScreen('home');
     this.showScreen("canvas");
     this.showScreen("scorescreen");
     this.startGame();
   }
+
   updateMenu() {
     let $LIFE = document.getElementById('life')
     $LIFE.innerHTML = " Life: " + this.character.life
     let $TIME = document.getElementById('time')
-    $TIME.innerHTML = " Time: 00.00.30"
+    $TIME.innerHTML = " Time: " + parseInt(this.timer / 1000); 
     let $SPEED = document.getElementById('speed')
-    $SPEED.innerHTML = " Speed: " + this.character.speed * 50 + "%"
+    $SPEED.innerHTML = " Level: " + this.character.speed * 50 + "%"
   }
+
   update() {
-    this.context.clearRect(0, 0, this.width, this.height);
-    //draw maze
-    this.maze.draw()
-    //draw items 
-    //draw enemy by level
-    for (let number of this.enemies) {
-      number.drawEnemy()
-    }
-    // this.enemy.drawEnemy();
-    this.boots.drawBoots();
-    this.armour.drawArmour();
-    this.pills.drawPills();
-    this.escape.drawEscape();
-    //character
-    this.character.drawCharacter()
+    // console.log(this.timer);
     this.updateMenu()
   }
+
+  draw () {
+    this.context.clearRect(0, 0, this.width, this.height);
+    this.maze.draw()
+    for (let enemy of this.enemies) {
+      enemy.draw()
+    }
+    for (let item of this.items) {
+      item.draw();
+    }
+    this.escape.draw();
+    this.character.draw()
+  }
+  
   gameOver() {
     this.hideScreen('canvas');
     this.hideScreen('scorescreen');

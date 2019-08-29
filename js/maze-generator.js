@@ -1,3 +1,7 @@
+const wallPatternImage = new Image();
+// wallPatternImage.src = './../img/walls/bigsand.png';
+wallPatternImage.src = './../img/walls/bricks.png';
+
 class MazeGenerator {
     constructor(game) {
       this.game = game;
@@ -27,7 +31,12 @@ class MazeGenerator {
       const positionX = cell.column * cellWidth;
       const positionY = cell.row * cellHeight;
       context.translate(positionX, positionY);
-      context.fillStyle = "#d8d8d8"
+      // context.fillStyle = "#d8d8d8"
+
+      const pattern = context.createPattern(wallPatternImage, 'repeat');
+      context.strokeStyle = pattern;
+      context.lineWidth = 5;
+
       for (let side in cell.walls) {
         if (cell.walls[side]) {
           context.beginPath();

@@ -1,8 +1,3 @@
-let spritersUp = 0
-let spritersRight = 0
-let spritersDown = 0
-let spritersLeft = 0
-
 class Character {
   constructor(game) {
     this.game = game;
@@ -10,121 +5,163 @@ class Character {
     this.col = 0;
     this.cellHeight = this.game.cellHeight;
     this.cellWidth = this.game.cellWidth;
-    this.position = game.maze.matrix[POSITION_Y][POSITION_X];
+    // this.position = game.maze.matrix[POSITION_Y][POSITION_X];
+    this.images = {};
+    this.spritersUpImage = 0
+    this.spritersRightImage = 0
+    this.spritersDownImage = 0
+    this.spritersLeftImage = 0
   }
 
-  drawCharacter() {
+  setSprites(sprites) {
+    this.images = {
+      up1: Object.assign(new Image(), { src: sprites.up1 }),
+      up2: Object.assign(new Image(), { src: sprites.up2 }),
+      down1: Object.assign(new Image(), { src: sprites.down1 }),
+      down2: Object.assign(new Image(), { src: sprites.down2 }),
+      right1: Object.assign(new Image(), { src: sprites.right1 }),
+      right2: Object.assign(new Image(), { src: sprites.right2 }),
+      left1: Object.assign(new Image(), { src: sprites.left1 }),
+      left2: Object.assign(new Image(), { src: sprites.left2 })
+    }
+  }
+
+  draw() {
     this.game.context.drawImage(this.image, this.col, this.row, this.cellWidth/2,this.cellHeight);
   }
+  
   move(direction) {
     switch (direction) {
       case 'up':
-        this.row -= this.cellHeight;
-        this.spritersUp();
-        this.checkCollisionTop();
-        this.checkItemOrEnemy();
+        this.moveUp();
         break;
       case 'right':
-        this.col += this.cellWidth;        
-        this.spritersRight();
-        this.checkCollisionRight();
-        this.checkItemOrEnemy();
+        this.moveRight();
         break;
       case 'down':
-        this.row += this.cellHeight;        
-        this.spritersDown();
-        this.checkCollisionBottom();
-        this.checkItemOrEnemy();
+        this.moveDown();
         break;
       case 'left':
-        this.col -= this.cellWidth;        
-        this.spritersLeft();
-        this.checkCollisionLeft();
-        this.checkItemOrEnemy();
+        this.moveLeft();
         break;
     }
+    this.checkItemOrEnemy();
   }
 
   //SPRITERS 
   spritersUp() {
-    if (spritersUp === 0) {
-      this.image.src = this.sprites.up1;
-      spritersUp++;
+    if (this.spritersUpImage === 0) {
+      this.image = this.images.up1;
+      this.spritersUpImage++;
     } else {
-      this.image.src = this.sprites.up2;
-      spritersUp--
+      this.image = this.images.up2;
+      this.spritersUpImage--
     }
   }
   spritersRight() {
-    if (spritersRight === 0) {
-      this.image.src = this.sprites.right1;
-      spritersRight++;
+    if (this.spritersRightImage === 0) {
+      this.image = this.images.right1;
+      this.spritersRightImage++;
     } else {
-      this.image.src = this.sprites.right2;
-      spritersRight--
+      this.image = this.images.right2;
+      this.spritersRightImage--
     }
   }
   spritersDown() {
-    if (spritersDown === 0) {
-      this.image.src = this.sprites.down1;
-      spritersDown++;
+    if (this.spritersDownImage === 0) {
+      this.image = this.images.down1;
+      this.spritersDownImage++;
     } else {
-      this.image.src = this.sprites.down2;
-      spritersDown--
+      this.image = this.images.down2;
+      this.spritersDownImage--
     }
   }
   spritersLeft() {
-    if (spritersLeft === 0) {
-      this.image.src = this.sprites.left1;
-      spritersLeft++;
+    if (this.spritersLeftImage === 0) {
+      this.image = this.images.left1;
+      this.spritersLeftImage++;
     } else {
-      this.image.src = this.sprites.left2;
-      spritersLeft--
+      this.image = this.images.left2;
+      this.spritersLeftImage--
     }
   }
 
   //CHECK COLLISION
-  checkCollisionTop() {
-    if (POSITION_Y < 0 || this.position.walls.up) {
-      this.row += this.cellHeight
-    }
-    else this.position = game.maze.matrix[POSITION_Y -=1][POSITION_X]  
-  }
-  
-  checkCollisionBottom() {
-    if (POSITION_Y > this.game.rows || this.position.walls.down) {
-      this.row -= this.cellHeight
-    }
-    else this.position = game.maze.matrix[POSITION_Y += 1][POSITION_X]   
-  }
-  
-  checkCollisionRight() {
-    if (POSITION_X > this.game.columns || this.position.walls.right) {
-      this.col -= this.cellWidth
-    }
-    else this.position = game.maze.matrix[POSITION_Y][POSITION_X += 1]
-  }
-  checkCollisionLeft() {
-    if (POSITION_X < 0 || this.position.walls.left) {
-      this.col += this.cellWidth
-    }
-    else this.position = game.maze.matrix[POSITION_Y][POSITION_X -=1] 
+  getMazeCell () {
+    return this.game.maze.matrix[this.row / this.cellHeight][this.col / this.cellWidth];
   }
 
+  moveUp () {
+    const cell = this.getMazeCell();
+    if (cell.walls.up) return;
+    const newPositionY = this.row - this.cellHeight;
+    if (newPositionY < 0) return;
+    this.row = newPositionY;
+    this.spritersUp();
+  }
+
+  moveDown () {
+    const cell = this.getMazeCell();
+    if (cell.walls.down) return;
+    const newPositionY = this.row + this.cellHeight;
+    if (newPositionY / this.cellHeight > this.game.rows) return;
+    this.row = newPositionY;
+    this.spritersDown();
+  }
+
+  moveRight () {
+    const cell = this.getMazeCell();
+    if (cell.walls.right) return;
+    const newPositionX = this.col + this.cellWidth;
+    if (newPositionX / this.cellWidth > this.game.columns) return;
+    this.col = newPositionX;
+    this.spritersRight();
+  }
+  
+  moveLeft () {
+    const cell = this.getMazeCell();
+    if (cell.walls.left) return;
+    const newPositionX = this.col - this.cellWidth;
+    if (newPositionX < 0) return;
+    this.col = newPositionX;
+    this.spritersLeft();
+  }
+  
+  // checkCollisionTop() {
+  //   if (POSITION_Y < 0 || this.position.walls.up) {
+  //     this.row += this.cellHeight
+  //   } else {
+  //     POSITION_Y -= 1;
+  //     this.position = game.maze.matrix[POSITION_Y][POSITION_X]  
+  //   } 
+  // }
+  
+  // checkCollisionBottom() {
+  //   if (POSITION_Y > this.game.rows || this.position.walls.down) {
+  //     this.row -= this.cellHeight
+  //   }
+  //   else this.position = game.maze.matrix[POSITION_Y += 1][POSITION_X]   
+  // }
+  
+  // checkCollisionRight() {
+  //   if (POSITION_X > this.game.columns || this.position.walls.right) {
+  //     this.col -= this.cellWidth
+  //   }
+  //   else this.position = game.maze.matrix[POSITION_Y][POSITION_X += 1]
+  // }
+  // checkCollisionLeft() {
+  //   if (POSITION_X < 0 || this.position.walls.left) {
+  //     this.col += this.cellWidth
+  //   }
+  //   else this.position = game.maze.matrix[POSITION_Y][POSITION_X -=1] 
+  // }
 
   //CHECK ITEMS OR ENEMIES
   checkItemOrEnemy() {
-    if (this.row === this.game.boots.row && this.col === this.game.boots.col) {
-      this.game.boots.boots();
-    }
-    if (this.row === this.game.armour.row && this.col === this.game.armour.col) {
-      this.game.armour.armour();
-    }
-    // if (this.row === this.game.potion.row && this.col === this.game.potion.col) {  
-    //   this.game.potion();
-    // }
-    if (this.row === this.game.pills.row && this.col === this.game.pills.col) {
-      this.game.pills.pills();
+    for (let item of this.game.items) {
+      if (this.row === item.row && this.col === item.col) {
+        item.catch();
+      }
     }
 
     this.game.enemies.map(enemy=> {

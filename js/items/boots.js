@@ -1,18 +1,17 @@
 /* eslint-disable no-undef */
 
-class Boots {
+class Boots extends Item {
   constructor(game) {
-    this.game = game
+    super(game);
     this.image = new Image();
     this.image.src = './../img/items/boots.png';
-    this.row = (CANVAS_WIDTH /10) * (Math.floor(Math.random() * 9));
-    this.col = (CANVAS_HEIGHT /10) * (Math.floor(Math.random() * 9));
-    
   }
-  drawBoots() {
+  
+  draw () {
     this.game.context.drawImage(this.image, this.row, this.col, 78, 52);
   }
-  boots() {
+  
+  catch () {
     this.game.character.verticalSpeed *= 2;
     this.game.character.horizontalSpeed *= 2;
     this.col = 9000;

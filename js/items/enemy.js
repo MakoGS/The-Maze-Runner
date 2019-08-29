@@ -8,7 +8,7 @@ class Enemy {
     this.col = this.game.cellWidth * (Math.floor(Math.random() * (this.game.columns - 1)));
     
   }
-  drawEnemy() {
+  draw() {
     this.game.context.drawImage(this.image, this.col, this.row, 78, 52);
   }
   
