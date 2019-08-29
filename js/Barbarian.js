@@ -11,8 +11,6 @@ class Barbarian extends Character {
     // this.controls.barbarianControls(this);
     this.image = barbarianImage;
     this.life = 2;
-    this.horizontalSpeed = CELL_WIDTH / 2;
-    this.verticalSpeed = CELL_HEIGHT / 2;
     this.setSprites({
       up1: './../img/barbarian/barbarian-up-1.png',
       up2: './../img/barbarian/barbarian-up-2.png',

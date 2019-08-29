@@ -1,19 +1,20 @@
 /* eslint-disable no-undef */
 
-const armourImage = new Image();
-armourImage.src = './../img/items/armour.png';
+const lessScoreImage = new Image();
+lessScoreImage.src = './../img/items/less-score.png';
 
-class Armour extends Item {
+class LessScore extends Item {
   constructor(game) {
     super(game);
-    this.image = armourImage;
-    
+    this.image = lessScoreImage;
   }
+
   draw() {
     this.game.context.drawImage(this.image, this.col, this.row, this.sizeX, this.sizeY);
   }
+
   catch() {
-    this.game.character.life += 1;
+this.game.gameScore -= 50;
     this.col = 9000;
   }
 }

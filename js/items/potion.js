@@ -10,7 +10,7 @@ class Potion extends Item {
   }
 
   draw() {
-    this.game.context.drawImage(this.image, this.row, this.col, 50, 50);
+    this.game.context.drawImage(this.image, this.row, this.col, this.sizeX, this.sizeY);
   }
 
   //POTION

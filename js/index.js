@@ -70,5 +70,4 @@ $reset.addEventListener('click', (e) =>  {
   game.homeGame();
 });
 
-
-
+//FINAL SCORE

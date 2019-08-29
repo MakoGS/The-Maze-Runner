@@ -9,7 +9,7 @@ class Enemy {
     
   }
   draw() {
-    this.game.context.drawImage(this.image, this.col, this.row, 78, 52);
+    this.game.context.drawImage(this.image, this.col, this.row, this.game.cellWidth / 2, this.game.cellHeight);
   }
   
   enemy() {

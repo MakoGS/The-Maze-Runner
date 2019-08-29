@@ -1,6 +1,7 @@
 class Character {
   constructor(game) {
     this.game = game;
+    this.time = 120;
     this.row = 0;
     this.col = 0;
     this.cellHeight = this.game.cellHeight;

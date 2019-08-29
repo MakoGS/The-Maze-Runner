@@ -11,36 +11,48 @@ class Game {
     this.controls = new Controls(this);
     this.controls.setKeyBindings();
     this.items = [];
+    this.gameStarted = Date.now();
+    this.gameScore = 0;
     this.setUpGame(10);
   }
 
   setUpGame (level) {
+    //game size config
     this.level = level;
-    this.timer = 0;
-    this.gameStarted = Date.now();
     this.rows = this.level;
     this.columns = this.level;
     this.cellWidth = parseInt(this.width / this.columns);
     this.cellHeight = parseInt(this.height / this.rows);
+
+    //generate maze
     this.maze = new MazeGenerator(this);
+
+    //items
     this.items = [];
-    // const probabilityOfHavingItems = 1 + (this.level - 10) / 6;
-    this.enemies = [];
+    this.enemies = [new Enemy(this), new Enemy(this)];
     for (let i = 0; i < 1 + (this.level - 10) / 2; i++) {
       this.enemies.push(new Enemy(this));
     }
+
     const probabilityOfHavingItems = 1 + (this.level - 10) / 3;
+
     for (let i = 0; i < probabilityOfHavingItems; i++) {
       this.items.push(new Armour(this));
     }
     for (let i = 0; i < probabilityOfHavingItems; i++) {
-      this.items.push(new Boots(this));
+      this.items.push(new MoreTime(this));
     }
     for (let i = 0; i < probabilityOfHavingItems; i++) {
-      this.items.push(new Pills(this));
+      this.items.push(new LessTime(this));
     }
     for (let i = 0; i < probabilityOfHavingItems; i++) {
       this.items.push(new Potion(this));
+    }
+    for (let i = 0; i < probabilityOfHavingItems; i++) {
+      this.items.push(new MoreScore(this));
+    }
+    for (let i = 0; i < probabilityOfHavingItems; i++) {
+      this.items.push(new LessScore(this));
     }
     this.escape = new Escape(this);
   }
@@ -55,6 +67,7 @@ class Game {
     this.character.col = 0;
     this.character.cellHeight = this.cellHeight;
     this.character.cellWidth = this.cellWidth;
+    this.gameScore += parseInt((((this.character.time - this.timer / 1000)) * 2));
   }
 
   handleControl(direction) {
@@ -88,6 +101,7 @@ class Game {
   
   loop(timestamp) {
     this.timer = Date.now() - (this.gameStarted || 0);    
+    this.gameTime = this.time_convert((this.character.time) - parseInt(this.timer / 1000));
     this.update();
     this.draw();
     window.requestAnimationFrame((timestamp) => this.loop(timestamp));
@@ -119,19 +133,30 @@ class Game {
     this.showScreen("scorescreen");
     this.startGame();
   }
+  time_convert(num)
+  { 
+   var minutes = Math.floor(num / 60);  
+   var seconds = num % 60;
 
+   return minutes + ":" + seconds;         
+ }
   updateMenu() {
     let $LIFE = document.getElementById('life')
     $LIFE.innerHTML = " Life: " + this.character.life
+
     let $TIME = document.getElementById('time')
-    $TIME.innerHTML = " Time: " + parseInt(this.timer / 1000); 
+    $TIME.innerHTML = " Time: " + this.gameTime;
+
+
     let $SPEED = document.getElementById('speed')
     $SPEED.innerHTML = " Level: " + this.character.speed * 50 + "%"
+    let $SCORE = document.getElementById('score')
+    $SCORE.innerHTML = " Score: " + this.gameScore;
   }
 
-  update() {
-    // console.log(this.timer);
+  update() {    
     this.updateMenu()
+    this.checkGameOver();
   }
 
   draw () {
@@ -146,11 +171,18 @@ class Game {
     this.escape.draw();
     this.character.draw()
   }
-  
+  checkGameOver() {
+    if (parseInt(this.gameTime) < 0) {
+      console.log('epa')
+      this.gameOver()
+    }
+  }
   gameOver() {
     this.hideScreen('canvas');
     this.hideScreen('scorescreen');
     this.showScreen('gameover');
+    const $finalScore = document.getElementById('finalScore');
+$finalScore.innerHTML = "Your final score is: " + this.gameScore;
   }
 
 }
