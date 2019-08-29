@@ -150,7 +150,7 @@ class Game {
 
 
     let $SPEED = document.getElementById('speed')
-    $SPEED.innerHTML = " Level: " + this.character.speed * 50 + "%"
+    $SPEED.innerHTML = " Level: " + (this.level-9);
     let $SCORE = document.getElementById('score')
     $SCORE.innerHTML = " Score: " + this.gameScore;
   }

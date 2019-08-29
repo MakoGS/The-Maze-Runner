@@ -2,11 +2,35 @@
 
 // AMAZON 
 
-// Play audio
+// Play intro audio
 var audioAmazon = new Audio('./..//sounds/amazon.mp3');
 function playAmazonSound() {
   audioAmazon.play();
 }
+
+//Play Next level Audio
+var amazonLevel = new Audio('./..//sounds/amazonlevel.mp3');
+function playAmazonLevel() {
+  amazonLevel.play();
+}
+
+//Play die audio
+var amazonDie = new Audio('./..//sounds/amazondie.mp3');
+function playAmazonDie() {
+  amazonDie.play();
+}
+
+//Play enemy audio
+var amazonDamage = new Audio('./..//sounds/amazondamage.mp3');
+function playAmazonDamage() {
+  amazonDamage.play();
+}
+//Play item audio
+var amazonItem = new Audio('./..//sounds/amazonitems.mp3');
+function playAmazonItem() {
+  amazonItem.play();
+}
+
 
 const $amazonImage = document.getElementById('amazon-intro');
 
@@ -30,10 +54,33 @@ $amazonImage.addEventListener('click', (e) => {
 
 //BARBARIAN 
 
-// Play audio
+// Play Intro audio
 var audioBarbarian = new Audio('./..//sounds/barbarian.mp3');
 function playBarbarianSound() {
   audioBarbarian.play();
+}
+
+//Play Next level Audio
+var barbarianLevel = new Audio('./..//sounds/barbarianlevel.mp3');
+function playBarbarianLevel() {
+  barbarianLevel.play();
+}
+
+//Play die audio
+var barbarianDie = new Audio('./..//sounds/barbariandie.mp3');
+function playBarbarianDie() {
+  barbarianDie.play();
+}
+
+//Play enemy audio
+var barbarianDamage = new Audio('./..//sounds/barbariandamage.mp3');
+function playBarbarianDamage() {
+  barbarianDamage.play();
+}
+//Play item audio
+var barbarianItem = new Audio('./..//sounds/barbarianitems.mp3');
+function playBarbarianItem() {
+  barbarianItem.play();
 }
 
 const $barbarianImage = document.getElementById('barbarian-intro');
@@ -60,14 +107,11 @@ $barbarianImage.addEventListener('click', (e) =>  {
 const $reset = document.getElementById('reset');
 const $restart = document.getElementById('restart');
 
-$restart.addEventListener('click', (e) =>  {
-  game.reset();
-  game.homeGame();
-});
+// $restart.addEventListener('click', (e) =>  {
+//   game.reset();
+//   game.hideScreen('gameover');
+// });
 
 $reset.addEventListener('click', (e) =>  {
   game.reset();
-  game.homeGame();
 });
-
-//FINAL SCORE

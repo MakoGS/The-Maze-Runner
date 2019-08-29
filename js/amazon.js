@@ -7,13 +7,13 @@ class Amazon extends Character {
   constructor(game) {
     super(game);
     this.game = game;
+    this.time = 60*4;
     // this.controls = new AmazonControls(this);
     // this.controls.amazonControls(this);
     // this.image = new Image();
     // this.image.src = './../img/Amazon/amazon-right-1.png';
     this.image = amazonImage;
-    this.life = 2;
-    this.speed = 1;
+    this.life = 4;
     // this.horizontalSpeed = CELL_WIDTH;
     // this.verticalSpeed = CELL_HEIGHT;
     this.setSprites({
@@ -27,4 +27,16 @@ class Amazon extends Character {
       left2: './../img/amazon/amazon-left-2.png',
     })
   }
+    playLevel() {
+      playAmazonLevel();
+    }
+    playItem() {
+      playAmazonItem();
+    }
+    playDamage() {
+      playAmazonDamage();
+    }
+    playDie() {
+      playAmazonDie();
+    }
   }

@@ -1,7 +1,6 @@
 class Character {
   constructor(game) {
     this.game = game;
-    this.time = 120;
     this.cellHeight = this.game.cellHeight;
     this.cellWidth = this.game.cellWidth;
     this.row = 0;
@@ -162,20 +161,24 @@ class Character {
     for (let item of this.game.items) {
       if (this.row === item.row && this.col === item.col) {
         item.catch();
+        this.playItem()
       }
     }
-
+    
     this.game.enemies.map(enemy=> {
       if ((this.row === enemy.row) && (this.col === enemy.col)) {
-       enemy.enemy();
+        enemy.enemy();
+        this.playDamage()
       }
     })
-
+    
     //CHECK escape
     if (this.row === this.game.escape.row && this.col === this.game.escape.col) {
       this.game.escape.escape();
+      this.playLevel()
     }
     if (this.life === 0) {
+      this.playLevel()
       this.game.gameOver();
     }
   }

@@ -10,7 +10,8 @@ class Barbarian extends Character {
     // this.controls = new barbarianControls(this);
     // this.controls.barbarianControls(this);
     this.image = barbarianImage;
-    this.life = 2;
+    this.life = 7;
+    this.time = 60*3;
     this.setSprites({
       up1: './../img/barbarian/barbarian-up-1.png',
       up2: './../img/barbarian/barbarian-up-2.png',
@@ -22,8 +23,16 @@ class Barbarian extends Character {
       left2: './../img/barbarian/barbarian-left-2.png',
     })
   }
-  test() {
-    console.log('test')
-    console.log('Other test');
+  playLevel() {
+    playBarbarianLevel();
   }
-  }
+playItem() {
+  playBarbarianItem();
+}
+playDamage() {
+  playBarbarianDamage();
+}
+playDie() {
+  playBarbarianDie();
+}
+}
