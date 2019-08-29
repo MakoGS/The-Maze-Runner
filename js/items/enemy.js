@@ -5,11 +5,11 @@ class Enemy {
     this.image = new Image();
     this.image.src = './../img/items/enemy.png';
     this.row = this.game.cellHeight * (Math.floor(Math.random() * (this.game.rows - 1)));
-    this.col = this.game.center + (this.game.cellWidth * (Math.floor(Math.random() * (this.game.columns - 1))));
+    this.col = this.game.cellWidth * (Math.floor(Math.random() * (this.game.columns - 1)));
     
   }
   draw() {
-    this.game.context.drawImage(this.image, this.col, this.row, this.game.cellWidth / 2, this.game.cellHeight);
+    this.game.context.drawImage(this.image, this.col + this.game.center, this.row, this.game.cellWidth / 2, this.game.cellHeight);
   }
   
   enemy() {

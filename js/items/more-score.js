@@ -10,7 +10,7 @@ class MoreScore extends Item {
   }
 
   draw() {
-    this.game.context.drawImage(this.image, this.col, this.row, this.sizeX, this.sizeY);
+    this.game.context.drawImage(this.image, this.col + this.game.center, this.row, this.sizeX, this.sizeY);
   }
 
   catch() {

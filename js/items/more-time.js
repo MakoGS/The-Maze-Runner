@@ -8,7 +8,7 @@ class MoreTime extends Item {
     this.image.src = './../img/items/more-time.png';
   }
   draw() {
-    this.game.context.drawImage(this.image, this.col, this.row, this.sizeX, this.sizeY);
+    this.game.context.drawImage(this.image, this.col + this.game.center, this.row, this.sizeX, this.sizeY);
   }
   
   catch () {
