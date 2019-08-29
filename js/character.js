@@ -2,10 +2,10 @@ class Character {
   constructor(game) {
     this.game = game;
     this.time = 120;
-    this.row = 0;
-    this.col = 0;
     this.cellHeight = this.game.cellHeight;
     this.cellWidth = this.game.cellWidth;
+    this.row = 0;
+    this.col = 0
     // this.position = game.maze.matrix[POSITION_Y][POSITION_X];
     this.images = {};
     this.spritersUpImage = 0
@@ -28,7 +28,7 @@ class Character {
   }
 
   draw() {
-    this.game.context.drawImage(this.image, this.col, this.row, this.cellWidth/2,this.cellHeight);
+    this.game.context.drawImage(this.image, this.col + this.game.center, this.row, this.cellWidth/2,this.cellHeight);
   }
   
   move(direction) {

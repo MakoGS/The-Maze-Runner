@@ -7,8 +7,8 @@ class Escape {
   constructor(game) {
     this.game = game
     this.image = escapeImage;
-    this.row = 400;
-    this.col = this.game.cellWidth * (1 );
+    this.row = (this.game.cellHeight * 9);
+    this.col = this.game.center + (this.game.cellWidth * 9);
     // this.row = this.game.cellHeight * (this.game.rows - 1);
     // this.col = this.game.cellWidth * (this.game.columns - 1);
   }
