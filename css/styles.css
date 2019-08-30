@@ -1,37 +1,33 @@
 @import url('https://fonts.googleapis.com/css?family=Staatliches&display=swap');
 
+.hideScreen {
+  display: none;
+}
+
 html,
 body {
   min-height: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
 }
 
 body {
-  background-color: var(--prim-clr);
   background-image: url("./../img/home-bg.jpg");
   background-color: aliceblue;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; 
 }
 
-h2 {
-  color: white;
-  font-family: 'Staatliches', cursive;
-  padding-top: 7%
-}
-
-.text {
-  margin-top:2.5em;
-}
-
-#amazon-habilities {
+.home-container {
   margin-left: 5%;
-  text-align: left;
+  margin-right: 5%;
 }
 
-#barbarian-habilities {
-  text-align: right;
-  margin-right: 5%
+
+.header-images {
+  display: flex;
+justify-content: space-between;
 }
 
 .amazon-img {
@@ -48,28 +44,24 @@ h2 {
   height: 100%;
 }
 
-.home {
-  background-image: url("./../img/home-bg.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center top;
-  padding-bottom: 2%;
-  width: 100vw;
-  height: 100vh;
+
+.habilities {
+  display: flex;
+  justify-content: space-between;
 }
 
-canvas {
-  margin-top: auto;
-  background-color: blanchedalmond;
-  /* background-image: url("./../img//walls/wall3.png");
-  background-repeat: no-repeat; */
-  border: 1px solid black;
-  max-height: 100vh;
-  /* max-width: 100vw;  */
+.col-3 {
+  width: 25%
 }
 
-.hideScreen {
-  display: none;
+h2 {
+  color: white;
+  font-family: 'Staatliches', cursive;
+  padding-top: 7%
+}
+
+#amazon-habilities {
+  text-align: left;
 }
 
 .player h1 {
@@ -84,40 +76,6 @@ canvas {
   margin-bottom: 5%;
 }
 
-/*  */
-
-button {
-  color: #617537;
-  background-color: #c2c2c2;
-  transition: 1s;
-  border: 2px solid;
-  font-family: 'Staatliches', cursive;
-  letter-spacing: 5px;
-  line-height: 1;
-  margin: 0.5em;
-  margin-left: 0em;
-  padding: 1em 2em;
-}
-
-button:hover {
-  background-color: #617537;
-  color: #fff;
-}
-
-#scorescreen h2,
-#restart {
-  text-align: center;
-  width: 90%;
-  color: #617537;
-  background-color: #d8d8d8;
-  border: 2px solid;
-  font-size: 17px;
-  letter-spacing: 5px;
-  line-height: 1;
-  padding: 1em 1em;
-  margin-top: 1em;
-}
-
 .blink_me {
   animation: blinker 2s linear infinite;
 }
@@ -128,18 +86,96 @@ button:hover {
   }
 }
 
-#gameover {
-  height: 100vh
-}
-
-#gameover img {
-  height: 70vh;
+.col-5 {
+  width: 40%;
+  margin: auto;
 }
 
 .instructions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   color: #000;
-  padding: 1em 1em;
+  padding: 1em 2em;
   background-color: rgba(255, 255, 255, 0.5);
+}
+
+.instructions div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-bottom:3%;
+}
+
+.instructions img {
+padding-right: 4%;
+}
+
+#barbarian-habilities {
+  text-align: right;
+}
+
+
+
+/*  ---------------------------------- */
+
+.container-game {
+  margin-top:4%;
+}
+
+canvas {
+  background-color: blanchedalmond;
+  /* background-image: url("./../img//walls/wall3.png");
+  background-repeat: no-repeat; */
+   border: 1px solid black;
+  max-height: 90vh;
+  max-width: 100vw;
+  width: 84%
+}
+
+#time,
+#score,
+#life,
+#speed,
+#restart,
+button {
+  font-family: 'Staatliches', cursive;
+  text-align: center;
+  color: #617537;
+  background-color: #d8d8d8;
+  border: 2px solid;
+  font-size: 17px;
+  letter-spacing: 5px;
+  line-height: 1;
+  padding: 1em 1em;
+}
+
+button:hover {
+  background-color: #617537;
+  color: #fff;
+}
+
+#gameover {
+  margin-top: 0%;
+  max-height: 100vh;
+  flex-direction:column;
+}
+
+#gameover img {
+  margin-top: 0%;
+  align-self: center;
+  height: 70vh;
+}
+
+.score-and-result {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  width: 40%;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 #finalScore {

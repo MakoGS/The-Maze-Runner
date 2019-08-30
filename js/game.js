@@ -116,7 +116,7 @@ class Game {
   // Show specific screen
   showScreen(id) {
     let screen = document.getElementById(id);
-    screen.style.display = "block";
+    screen.style.display = "flex";
   }
 
   //Show Canvas Screen

@@ -6,36 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Maze runner</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-  <div class="container-fluid d-flex justify-content-center">
 
+    <div class="container-fluid d-flex row justify-content-around container-game">
     
-    <div id="scorescreen" class="hideScreen container-fluid">
-        <h2 id="time">Time:</h2>
-        <h2 id="score">Score: 0</h2>
-        <h2 id="life">Life: 0</h2>
-        <h2 id="speed">Speed: 0</h2>
-      <button>Home</button>
-      <button id="reset">Reset</button>
-      <button>PAUSE</button>
-  </div>  
+        <div id="scorescreen" class="hideScreen flex-column nowrap justify-content-between">
+            <span id="time"><h2>Time </h2></span>
+            <span id="score"><h2>Score: 0</h2></span>
+            <span id="life"><h2>Life: 0</h2></span>
+            <span id="speed"><h2>Speed: 0</h2></span>
   
-  <canvas id="canvas" class="hideScreen" width="1100" height="600">
-    </canvas>
-  
+          <button>Home</button>
+          <button id="reset">Reset</button>
+          <button>PAUSE</button>
+          </div>  
 
-    <div id="home" class="home">
-      <div class="d-flex justify-content-around align-items-center">
-        <img id="amazon-intro" class="img-fluid amazon-img" src="img/Amazon/amazon-intro-bw.png" />
-        <img class="img-fluid centerlogo" src="img/mazw runner.png" />
-        <img id="barbarian-intro" class="img-fluid barbarian-img" src="img/Barbarian/barbarian-intro-bw.png" />
+           <canvas id="canvas" class="hideScreen" width="1100" height="600"></canvas>
+    
+    </div>
+ 
+
+  
+    <div id="home" class="home-container">
+      <div class="header-images">
+        <img id="amazon-intro" class="amazon-img" src="img/Amazon/amazon-intro-bw.png" />
+        <img class="centerlogo" src="img/mazw runner.png" />
+        <img id="barbarian-intro" class="barbarian-img" src="img/Barbarian/barbarian-intro-bw.png" />
       </div>
-      <div class="d-flex justify-content-between text">
+
+      <div class="habilities">
 
           <div id="amazon-habilities" class="col-3">
             <h2 class="speed">HEALTH</h2>
@@ -46,16 +50,19 @@
   
           <div id="player" class="player col-5">
             <h1 class="blink_me"> SELECT PLAYER</h1>
-            <p class="instructions"><img src="img/arrow-keys-icon-4.jpg" width="40px"/> Use direction arrows to move along the maze. <br/>
-              <img src="img/items/enemy.png" width="40px"/> Enemies reduce your life by 1 point.
-              <br/>
-              <img src="img/items/armour.png" width="40px"/> Armour increments your life by 1.
-              <br/>
-              <img src="img/items/boots.png" width="40px"/> Boots increment 50% of your speed.
-              <br/>
+            <div class="instructions">
+              
+              <div><img src="img/arrow-keys-icon-4.jpg" width="40px"/> <span>Use direction arrows to move along the maze. </span></div>
+              
+              <div><img src="img/items/enemy.png" width="40px"/> <span>Enemies reduce your life by 1 point.</span></div>
+              
+              <div><img src="img/items/armour.png" width="40px"/> <span>Armour increments your life by 1.</span></div>
+              
+              <div><img src="img/items/boots.png" width="40px"/> <span>Boots increment 50% of your speed.</span></div>
+              
               <!-- <img src="img/items/pills.png" width="40px"/> Pills make you sleepy and will reduce 50% your speed. <br/>
               <img src="img/items/potions.png" width="40px"/> No risk no glory! Potions will give you random attributes.<br/> -->
-          </p>
+          </div>
           </div>
   
           <div id="barbarian-habilities" class="col-3">
@@ -66,18 +73,14 @@
           </div>
   
         </div>
-      </div>
-
+      </div>    
       <div id="gameover" class="home hideScreen">
-          <div class="d-flex justify-content-center">
-            <img class="img-fluid" src="img/gameover.png" />
-          </div>
-              <div class="d-flex justify-content-center row">
+            <img src="img/gameover.png" />
+              <div class="score-and-result">
                   <p id="finalScore">Your score is:</p>
                 <button id="restart" onclick="window.location.href='index.html'">RESTART</button>
               </div>
           </div>
-  </div>
   <script src="js/globals.js"></script>
   <script src="js/items/items.js"></script>
   <script src="js/items/more-score.js"></script>
