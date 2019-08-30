@@ -29,9 +29,6 @@ class Barbarian extends Character {
 playItem() {
   playBarbarianItem();
 }
-playDamage() {
-  playBarbarianDamage();
-}
 playDie() {
   playBarbarianDie();
 }

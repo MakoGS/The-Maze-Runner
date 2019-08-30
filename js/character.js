@@ -25,7 +25,9 @@ class Character {
       left2: Object.assign(new Image(), { src: sprites.left2 })
     }
   }
-
+  playDamage() {
+    playDamage();
+  }
   draw() {
     this.game.context.drawImage(this.image, this.col + this.game.center, this.row, this.cellWidth/2,this.cellHeight);
   }

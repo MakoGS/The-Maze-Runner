@@ -30,12 +30,6 @@ var amazonDie = new Audio('./..//sounds/amazondie.mp3');
 function playAmazonDie() {
   amazonDie.play();
 }
-
-//Play enemy audio
-var amazonDamage = new Audio('./..//sounds/amazondamage.mp3');
-function playAmazonDamage() {
-  amazonDamage.play();
-}
 //Play item audio
 var amazonItem = new Audio('./..//sounds/amazonitems.mp3');
 function playAmazonItem() {
@@ -84,9 +78,9 @@ function playBarbarianDie() {
 }
 
 //Play enemy audio
-var barbarianDamage = new Audio('./..//sounds/barbariandamage.mp3');
-function playBarbarianDamage() {
-  barbarianDamage.play();
+var damage = new Audio('./..//sounds/damage.mp3');
+function playDamage() {
+  damage.play();
 }
 //Play item audio
 var barbarianItem = new Audio('./..//sounds/barbarianitems.mp3');

@@ -33,9 +33,6 @@ class Amazon extends Character {
     playItem() {
       playAmazonItem();
     }
-    playDamage() {
-      playAmazonDamage();
-    }
     playDie() {
       playAmazonDie();
     }
