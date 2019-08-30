@@ -1,5 +1,16 @@
 /* eslint-disable no-undef */
 
+// var bgx = Math.floor(Math.random() * 256);
+// var bgy = Math.floor(Math.random() * 256);
+// var bgz = Math.floor(Math.random() * 256);
+// var bgColor = "rgb(" + bgx + "," + bgy + "," + bgz + ")";
+// console.log(bgColor);
+
+
+// const $bgCanvas = document.getElementById('canvas');
+
+// $canvas.style.background = bgColor;
+
 // AMAZON 
 
 // Play intro audio
